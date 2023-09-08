@@ -1,1 +1,53 @@
-<p>home works!</p>
+<div class="container">
+  <h1>Your Tickets</h1>
+
+  <div *ngIf="!loading" class="ticket-list">
+    <div *ngIf="!tickets || tickets.length === 0">
+      <p>You have no tickets</p>
+    </div>
+    <div *ngFor="let ticket of tickets">
+      <app-ticket [ticket]="ticket"></app-ticket>
+    </div>
+  </div>
+
+  <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+  <button *ngIf="!addTicketMode" mat-raised-button color="primary" (click)="enterAddTicketMode()">Add Ticket</button>
+  <div *ngIf="addTicketMode">
+    <mat-card>
+      <mat-card-content>
+        <form (ngSubmit)="addTicket()" class="column">
+          <div class="row numberInputContainer">
+            <mat-form-field>
+              <input matInput type="number" placeholder="Number 1" [(ngModel)]="addTicketNumbers[0]" name="number1" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number" placeholder="Number 2" [(ngModel)]="addTicketNumbers[1]" name="number2" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number" placeholder="Number 3" [(ngModel)]="addTicketNumbers[2]" name="number3" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number" placeholder="Number 4" [(ngModel)]="addTicketNumbers[3]" name="number4" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number" placeholder="Number 5" [(ngModel)]="addTicketNumbers[4]" name="number5" required>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker" [(ngModel)]="dateSelected" name="dateSelected">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div>
+              <button mat-raised-button color="primary" type="submit">Add</button>
+              <button mat-raised-button color="warn" type="button" (click)="exitAddTicketMode()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

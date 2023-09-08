@@ -1,20 +1,29 @@
 version: '3'
 services:
-#  backend:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    ports:
-#      - "3000:3000" # Map container port 3000 to host port 3000
-#    environment:
-#      # Set your environment variables here if needed
-#      POSTGRES_HOST: postgres
-#      POSTGRES_PORT: 5432
-#      POSTGRES_DB: lottery_db
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: postgres
-#    depends_on:
-#      - postgres
+  backend:
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: lottery_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    depends_on:
+      - postgres
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./packages/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
 
   postgres:
     image: postgres:latest
@@ -23,4 +32,4 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432" # Map container port 5432 to host port 5432
+      - "5432:5432"

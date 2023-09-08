@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   onLogin(): void {
     const credentials = {
@@ -23,6 +24,7 @@ export class LoginComponent {
         (response: any) => {
           localStorage.setItem('access_token', response['access_token']);
           console.log('Login successful!', response);
+          this.router.navigate(['/home']);
         },
         (error) => {
           console.error('Login error:', error);
