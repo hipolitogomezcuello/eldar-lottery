@@ -28,4 +28,6 @@ sequelize db:migrate
 
 Y listo! Ya podés acceder a la aplicación en http://localhost:80
 
+Para crear tickets vas a necesitar registrarte!
+
 Espero su feedback! Muchas gracias por la oportunidad!
