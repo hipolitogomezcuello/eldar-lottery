@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
+  username?: string;
+
+  constructor() {
+    const user = localStorage.getItem('username');
+    if (user) {
+      this.username = user;
+    }
+  }
+
+  getName() {
+    return this.username ?? 'Guest';
+  }
 }

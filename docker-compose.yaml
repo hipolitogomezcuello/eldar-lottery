@@ -7,11 +7,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
-      POSTGRES_DB: lottery_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      DB_HOST: postgres
     depends_on:
       - postgres
 
@@ -28,7 +24,7 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: lottery_db
+      POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:

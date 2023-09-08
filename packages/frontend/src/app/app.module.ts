@@ -17,6 +17,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { MatNativeDateModule } from "@angular/material/core";
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

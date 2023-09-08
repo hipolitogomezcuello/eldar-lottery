@@ -23,6 +23,7 @@ export class LoginComponent {
       .subscribe(
         (response: any) => {
           localStorage.setItem('access_token', response['access_token']);
+          localStorage.setItem('username', this.username);
           console.log('Login successful!', response);
           this.router.navigate(['/home']);
         },
