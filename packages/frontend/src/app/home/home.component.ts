@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from "@angular/common/http";
 import { Ticket } from "../types/types";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -15,9 +16,13 @@ export class HomeComponent implements OnInit {
   addTicketNumbers: number[] = [];
   dateSelected: Date = new Date();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
+    if (!localStorage.getItem('access_token')) {
+      this.router.navigate(['/login']);
+      return
+    }
     this.loadTickets();
   }
 
